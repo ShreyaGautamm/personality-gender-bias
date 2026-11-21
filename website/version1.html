@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personality Shapes Gender Bias in LLM Narratives | Research Showcase</title>
+  <meta name="description" content="An empirical investigation into how personality traits (HEXACO and Dark Triad) systematically modulate gender bias in persona-conditioned LLM narratives across English and Hindi.">
+
+  <!-- Inter Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Custom Stylesheet (Version 1) -->
+  <link rel="stylesheet" href="css/styles-v1.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="#" class="nav-logo">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="color: #818cf8;"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+        <span>Personality-Gender-Bias</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#comparator">Story Comparator</a></li>
+        <li><a href="#methodology">Centroid Metric</a></li>
+        <li><a href="#findings">Empirical Results</a></li>
+        <li><a href="#quiz">Human Quiz</a></li>
+        <li><a href="#occupations">50 Occupations</a></li>
+        <li><a href="index.html" style="color: #6b1d49; font-weight: 700;">Version 2 (Pipeline &amp; Game) ↗</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section (Styled per reference template) -->
+  <header class="hero-section">
+    <div class="container">
+      <!-- 1. Topics Category Track -->
+      <div class="hero-topics">
+        <span>AI FAIRNESS</span>
+        <span class="topic-dot">·</span>
+        <span>GENDER BIAS</span>
+        <span class="topic-dot">·</span>
+        <span>MULTILINGUAL NLP</span>
+        <span class="topic-dot">·</span>
+        <span>PERSONA CONDITIONING</span>
+        <span class="topic-dot">·</span>
+        <span>LLM NARRATIVES</span>
+      </div>
+
+      <!-- 2. Main Title with Maroon Accent -->
+      <h1 class="hero-title">
+        <span class="hero-brand">Personality Shapes Gender Bias</span> in Persona-Conditioned LLM Narratives Across English and Hindi
+      </h1>
+
+      <!-- 3. Italic Subtitle / Abstract summary -->
+      <p class="hero-subtitle">
+        An empirical investigation across 23,400 generated stories from six state-of-the-art LLMs, demonstrating that HEXACO and Dark Triad personality traits act as systematic amplifiers and attenuators of gender stereotypes in occupational contexts.
+      </p>
+
+      <!-- 4. Authors & Affiliations -->
+      <div class="hero-authors-wrap">
+        <div class="hero-authors-list">
+          <span class="author-entry">Tanay Kumar<sup>1,*</sup></span>
+          <span class="author-entry">Shreya Gautam<sup>1,*</sup></span>
+          <span class="author-entry">Aman Chadha<sup>2,†</sup></span>
+          <span class="author-entry">Vinija Jain<sup>3,†</sup></span>
+          <span class="author-entry">Francesco Pierri<sup>1</sup></span>
+        </div>
+        <div class="hero-affils-list">
+          <span class="affil-item"><sup>1</sup>Politecnico di Milano</span>
+          <span class="affil-item"><sup>2</sup>Apple</span>
+          <span class="affil-item"><sup>3</sup>Meta</span>
+          <span class="footnote-item">*Equal contribution</span>
+          <span class="footnote-item">†Work done outside role at respective companies</span>
+        </div>
+      </div>
+
+      <!-- 5. Action Buttons (Solid Maroon Pills & Dashed Border Pills) -->
+      <div class="hero-actions">
+        <a href="https://arxiv.org/abs/2604.23600" target="_blank" rel="noopener noreferrer" class="btn-solid-plum">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          arXiv
+        </a>
+        <a href="https://arxiv.org/pdf/2604.23600" target="_blank" rel="noopener noreferrer" class="btn-solid-plum">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          ↓ PDF
+        </a>
+        <a href="https://github.com/ShreyaGautamm/personality-gb-sample" target="_blank" rel="noopener noreferrer" class="btn-dashed-plum">
+          &lt;&gt; Code
+        </a>
+        <a href="#citation" class="btn-dashed-plum">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          BibTeX
+        </a>
+      </div>
+
+      <!-- Stat Highlight Banner -->
+      <div class="stat-banner">
+        <div class="stat-card">
+          <div class="stat-num">23,400</div>
+          <div class="stat-label">Generated Artifacts</div>
+          <div class="stat-desc">Standardized occupational narratives across controlled factors</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">6 Models</div>
+          <div class="stat-label">Diverse Architectures</div>
+          <div class="stat-desc">GPT-5 nano, LLaMA-3.3, DeepSeek-R1, Gemma-3, Falcon, Mixtral</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">50 Roles</div>
+          <div class="stat-label">Indian Socio-Cultural Grounding</div>
+          <div class="stat-desc">25 male-stereotyped & 25 female-stereotyped occupations</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">2 Languages</div>
+          <div class="stat-label">Bilingual Evaluation</div>
+          <div class="stat-desc">Cross-lingual Hindi & English analysis with IndicSBERT</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Section 1: Interactive Narrative Comparator -->
+  <section id="comparator" class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Interactive Narrative Explorer</span>
+        <h2 class="section-title">How Personality Restructures Gendered Scripts</h2>
+        <p class="section-subtitle">
+          When conditioned with identical personality descriptions, LLMs filter traits through gender-specific cultural scripts rather than applying personality neutrally.
+        </p>
+      </div>
+
+      <div class="glass-panel">
+        <div class="comparator-controls">
+          <div class="control-group">
+            <label for="narrativeSelect">Select Qualitative Case Study</label>
+            <select id="narrativeSelect" class="custom-select"></select>
+          </div>
+          <div>
+            <span id="paperFigureBadge" class="badge-pill" style="margin-bottom: 0;">Figure 8 • LLaMA-3.3</span>
+          </div>
+        </div>
+
+        <div id="narrativeInsight" class="story-insight-box">
+          <!-- Filled by JS -->
+        </div>
+
+        <!-- Side-by-Side View -->
+        <div class="stories-grid">
+          <div id="maleNarrativeColumn" class="story-column male-column">
+            <!-- Male Story Rendered Here -->
+          </div>
+          <div id="femaleNarrativeColumn" class="story-column female-column">
+            <!-- Female Story Rendered Here -->
+          </div>
+        </div>
+
+        <!-- Highlighting Legend -->
+        <div class="comparator-legend">
+          <div class="legend-item">
+            <span class="legend-dot" style="background: #38bdf8;"></span>
+            <span><strong>Male Script Markers:</strong> Overt Defiance, Dominance, Grandiosity, Authority Rejection</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-dot" style="background: #fb7185;"></span>
+            <span><strong>Female Script Markers:</strong> Covert Harm, Relational Sabotage, Vulnerability, Maternal Caretaking</span>
+          </div>
+          <div class="legend-item">
+            <span>💡 <em>Hover over highlighted segments to see sociological category tags.</em></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Metric & Centroid Pipeline -->
+  <section id="methodology" class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Measurement Methodology</span>
+        <h2 class="section-title">The Centroid-Based Sentence Embedding Metric</h2>
+        <p class="section-subtitle">
+          Measuring gender stereotyping at the sentence level in a shared multilingual semantic space.
+        </p>
+      </div>
+
+      <div class="pipeline-flow">
+        <div class="pipeline-step">
+          <div class="step-num">Step 1</div>
+          <div class="step-title">Stereotype Lexicons</div>
+          <div class="step-desc">
+            Curated parallel word lists in English and Hindi (~200 items each covering male and female traits, occupations, and actions), verified with native speakers.
+          </div>
+        </div>
+        <div class="pipeline-step">
+          <div class="step-num">Step 2</div>
+          <div class="step-title">Template Contextualization</div>
+          <div class="step-desc">
+            Words are transformed into contextualized sentences using grammatical templates (e.g., <em>"This is [X]"</em> and <em>"वह [X] है"</em>) to preserve POS semantics.
+          </div>
+        </div>
+        <div class="pipeline-step">
+          <div class="step-num">Step 3</div>
+          <div class="step-title">IndicSBERT Centroids</div>
+          <div class="step-desc">
+            Embedded into an Indic-tailored sentence space to compute the male reference centroid <em>c</em><sub>male</sub> and female centroid <em>c</em><sub>female</sub>.
+          </div>
+        </div>
+      </div>
+
+      <!-- Formula Display -->
+      <div class="formula-card">
+        <div style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); font-weight: 600;">
+          Sentence-Level Difference of Cosines
+        </div>
+        <div class="formula-display">
+          bias(s<sub>i</sub>) = cos(s<sub>i</sub>, c<sub>male</sub>) − cos(s<sub>i</sub>, c<sub>female</sub>)
+        </div>
+        <div style="font-size: 0.88rem; color: #cbd5e1;">
+          Aggregated to story level via peak salience: <strong>story(S) = bias(s<sub>k</sub>)</strong> where <em>k = argmax |bias(s<sub>i</sub>)|</em>
+        </div>
+      </div>
+
+      <!-- Centroid Interactive Spectrum -->
+      <div class="slider-interactive-box">
+        <div style="display: flex; justify-content: space-between; align-items: baseline;">
+          <h4 style="color: #fff; font-size: 1.1rem; font-weight: 700;">Interactive Semantic Spectrum</h4>
+          <span id="spectrumScoreDisplay" class="score-badge score-male" style="font-size: 0.95rem;">
+            IndicSBERT Bias Score: +0.038
+          </span>
+        </div>
+
+        <div class="spectrum-track">
+          <div id="spectrumMarker" class="spectrum-marker" style="left: 88%;"></div>
+        </div>
+
+        <div class="spectrum-labels">
+          <span style="color: #fb7185;">← Female Stereotypic Centroid (-1.0)</span>
+          <span style="color: #94a3b8;">Neutral (0.0)</span>
+          <span style="color: #38bdf8;">Male Stereotypic Centroid (+1.0) →</span>
+        </div>
+
+        <div style="margin-top: 1.5rem; background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px;">
+          <div id="spectrumSentenceDisplay" style="font-size: 1rem; color: #e2e8f0; font-style: italic; margin-bottom: 0.5rem;">
+            "He showed them who is boss and commanded the workers with absolute authority."
+          </div>
+          <div id="spectrumExplanation" style="font-size: 0.85rem; color: var(--text-muted);">
+            High alignment with male stereotype centroid (commands, authority, dominant verbs).
+          </div>
+        </div>
+
+        <!-- Preset Buttons -->
+        <div class="preset-sentences">
+          <span style="font-size: 0.82rem; color: var(--text-muted); align-self: center; margin-right: 0.5rem;">Try examples:</span>
+          <button class="preset-btn active" data-preset="p1">Dominant Command (Male)</button>
+          <button class="preset-btn" data-preset="p2">Empathetic Care (Female)</button>
+          <button class="preset-btn" data-preset="p3">Neutral Technical Inspection</button>
+          <button class="preset-btn" data-preset="p4">Hindi Male Inflection (रखता हूँ)</button>
+          <button class="preset-btn" data-preset="p5">Hindi Female Inflection (करती हूँ)</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Empirical Findings & Regression -->
+  <section id="findings" class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Empirical Results</span>
+        <h2 class="section-title">Personality as a Systematic Bias Modulator</h2>
+        <p class="section-subtitle">
+          Dark Triad traits act as powerful male-bias amplifiers, while prosocial traits exhibit heterogeneous effects across 6 language models.
+        </p>
+      </div>
+
+      <div class="charts-grid">
+        <!-- Forest Plot Card -->
+        <div class="chart-card">
+          <div class="chart-title">OLS Personality Trait Effects on Bias Score</div>
+          <div class="chart-sub">Positive values indicate shift toward male-stereotypical language (p &lt; 0.05)</div>
+
+          <div id="forestPlotContainer" class="forest-plot">
+            <!-- Rendered by JS -->
+          </div>
+
+          <div style="display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--text-muted); margin-top: 1rem; border-top: 1px solid var(--border-color); padding-top: 0.5rem;">
+            <span>← Female Attenuation (-0.02)</span>
+            <span>Neutral (0.00)</span>
+            <span>Male Amplification (+0.02) →</span>
+          </div>
+        </div>
+
+        <!-- Model Benchmark Cards -->
+        <div class="chart-card">
+          <div class="chart-title">Stereotypic Leaning Across Model Architectures</div>
+          <div class="chart-sub">Comparing Baseline (without personality) vs. Persona-conditioned prompts</div>
+
+          <div id="benchmarkListContainer" style="display: flex; flex-direction: column; gap: 0.75rem;">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Takeaway Grid -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin-top: 2rem;">
+        <div class="stat-card">
+          <div class="step-num">RQ1: Amplification vs Attenuation</div>
+          <div style="font-weight: 700; color: #fff; margin-bottom: 0.5rem;">Dark Triad Consistently Amplifies Bias</div>
+          <p style="font-size: 0.85rem; color: var(--text-secondary);">
+            Machiavellianism (+0.021) and Psychopathy (+0.018) consistently produce the largest positive shifts in stereotypic language across all 6 models.
+          </p>
+        </div>
+
+        <div class="stat-card">
+          <div class="step-num">RQ2: Trait vs Gender Relative Power</div>
+          <div style="font-weight: 700; color: #fff; margin-bottom: 0.5rem;">Personality Often Trumps Gender Labels</div>
+          <p style="font-size: 0.85rem; color: var(--text-secondary);">
+            Coefficients for Dark Triad traits exceed the coefficient of explicit gender assignment (+0.011 for male), showing personality cues dominate narrative framing.
+          </p>
+        </div>
+
+        <div class="stat-card">
+          <div class="step-num">RQ3: Hindi vs English Dynamics</div>
+          <div style="font-weight: 700; color: #fff; margin-bottom: 0.5rem;">Morphology Shifts Personality Variance</div>
+          <p style="font-size: 0.85rem; color: var(--text-secondary);">
+            Hindi exhibits higher baseline male skew due to cultural defaults and verb morphology, but English displays higher personality-driven modulation range.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Human Validation & Mini-Quiz -->
+  <section id="quiz" class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Human Validation Experiment</span>
+        <h2 class="section-title">Can You Spot the More Stereotyped Story?</h2>
+        <p class="section-subtitle">
+          Test your intuition against 3 independent human annotators (Fleiss' &kappa; = 0.66–0.69) who evaluated paired narratives.
+        </p>
+      </div>
+
+      <div class="quiz-box">
+        <div class="quiz-question-header">
+          <span class="quiz-counter">Annotation Study Evaluation</span>
+          <span id="quizRole" class="quiz-role-title">Female Construction Worker</span>
+        </div>
+
+        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.25rem;">
+          Which narrative exhibits greater gender stereotyping?
+        </p>
+
+        <div class="quiz-options-grid">
+          <div id="quizCardA" class="quiz-card">
+            <div class="quiz-card-label">Narrative A</div>
+            <div id="quizTextA" class="quiz-card-text">...</div>
+          </div>
+          <div id="quizCardB" class="quiz-card">
+            <div class="quiz-card-label">Narrative B</div>
+            <div id="quizTextB" class="quiz-card-text">...</div>
+          </div>
+        </div>
+
+        <div id="quizReveal" class="quiz-reveal-box">
+          <div id="quizExplanation"></div>
+          <div id="quizStats" style="font-weight: 600; color: #34d399; margin-top: 0.5rem; font-size: 0.85rem;"></div>
+          <div style="margin-top: 1rem; text-align: right;">
+            <button id="quizNextBtn" class="btn-action btn-primary" style="padding: 0.4rem 1rem; font-size: 0.85rem;">Next Question →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: 50 Occupations Explorer -->
+  <section id="occupations" class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Ecological Validity</span>
+        <h2 class="section-title">50 Indian Occupations, Artifacts &amp; Scenarios</h2>
+        <p class="section-subtitle">
+          Compiled from Ministry of Labour &amp; Employment standards to ground narratives in realistic workplace tasks.
+        </p>
+      </div>
+
+      <div class="glass-panel">
+        <div class="table-filter-bar">
+          <input type="text" id="occupationSearch" class="search-input" placeholder="Search occupation, artifact, or scenario...">
+          <select id="occupationCategoryFilter" class="custom-select" style="min-width: 200px;">
+            <option value="all">All 50 Occupations</option>
+            <option value="male-stereotyped">Male-Stereotyped (25 Roles)</option>
+            <option value="female-stereotyped">Female-Stereotyped (25 Roles)</option>
+          </select>
+        </div>
+
+        <div class="occupations-table-container">
+          <table class="table-custom">
+            <thead>
+              <tr>
+                <th style="width: 20%;">Occupation</th>
+                <th style="width: 18%;">Gender Category</th>
+                <th style="width: 22%;">Contextual Artifact</th>
+                <th style="width: 40%;">Task Scenario</th>
+              </tr>
+            </thead>
+            <tbody id="occupationsTableBody">
+              <!-- Rendered by JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 6: Citation & Contact -->
+  <section id="citation" class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Reference &amp; Resources</span>
+        <h2 class="section-title">Citation</h2>
+        <p class="section-subtitle">
+          If you find this research useful in your work, please cite our paper:
+        </p>
+      </div>
+
+      <div class="bibtex-box" style="max-width: 800px; margin: 0 auto;">
+        <button id="copyBibtexBtn" class="btn-copy">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Copy BibTeX
+        </button>
+        <pre class="bibtex-code">@article{kumar2026personality,
+  title={Personality Shapes Gender Bias in Persona-Conditioned LLM Narratives Across English and Hindi: An Empirical Investigation},
+  author={Kumar, Tanay and Gautam, Shreya and Chadha, Aman and Jain, Vinija and Pierri, Francesco},
+  journal={arXiv preprint arXiv:2604.23600},
+  year={2026}
+}</pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p style="margin-bottom: 0.5rem;">
+        Research by Politecnico di Milano, Apple, &amp; Meta.
+      </p>
+      <p style="font-size: 0.78rem;">
+        Interactive Research Showcase • Created for transparent AI fairness and persona-conditioning evaluation.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/app-v1.js"></script>
+</body>
+</html>
