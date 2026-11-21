@@ -27,11 +27,14 @@ window.PAPER_DATA = {
       languages: "English & Hindi",
       traitsCount: "9 Traits (18 Levels)"
     },
-    bibtex: `@article{kumar2026personality,
-  title={Personality Shapes Gender Bias in Persona-Conditioned LLM Narratives Across English and Hindi: An Empirical Investigation},
-  author={Kumar, Tanay and Gautam, Shreya and Chadha, Aman and Jain, Vinija and Pierri, Francesco},
-  journal={arXiv preprint arXiv:2604.23600},
-  year={2026}
+    bibtex: `@misc{kumar2026personalityshapesgenderbias,
+      title={Personality Shapes Gender Bias in Persona-Conditioned LLM Narratives Across English and Hindi: An Empirical Investigation}, 
+      author={Tanay Kumar and Shreya Gautam and Aman Chadha and Vinija Jain and Francesco Pierri},
+      year={2026},
+      eprint={2604.23600},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2604.23600}, 
 }`
   },
 
